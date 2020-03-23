@@ -16,7 +16,8 @@ io.on('connection', socket => {
     io.emit('sendMsg', {
       user: currentUser,
       type: 1,
-      msg: 'Joined'
+      msg: 'Joined',
+      createTime: new Date()
     })
   })
 
@@ -24,12 +25,13 @@ io.on('connection', socket => {
     // 监听用户发送消息
     io.emit('sendMsg', {
       user: currentUser,
-      msg
+      msg,
+      createTime: new Date()
     })
   })
 
   socket.on('disconnect', () => {
-    connectedUser.splice(connectedUser.indexOf(currentUser), 1)
+    if (currentUser) connectedUser.splice(connectedUser.indexOf(currentUser), 1)
     updateUser()
     console.log('用户已经退出', connectedUser);
   })

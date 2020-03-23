@@ -1,9 +1,7 @@
 import Vue from 'vue'
 import App from './App.vue'
 import VueSocketIO from 'vue-socket.io'
-
 Vue.config.productionTip = false
-
 import 'papercss/dist/paper.css'
 
 Vue.use(new VueSocketIO({

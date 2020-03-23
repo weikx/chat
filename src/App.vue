@@ -10,7 +10,7 @@
           <!-- <li class="">Sagool joined.</li> -->
           <li :class="{desc: item.type == 1}" v-for="(item, index) in messageList" :key="index">
             <span class="user-name">{{item.user}}:</span>
-            <span class="user-message margin-left-small">{{item.msg}}</span>
+            <span class="user-message margin-left-small" :title="item.createTime">{{item.msg}}</span>
           </li>
         </ul>
       </div>
@@ -56,6 +56,7 @@
 
 <script>
 
+import VConsole from 'vconsole'
 export default {
   name: 'App',
   data() {
@@ -77,6 +78,7 @@ export default {
     },
     sendMsg () {
       if (!this.messageText) return alert('请输入消息内容')
+      if (this.messageText === 'debug') return new VConsole()
       this.$socket.emit('sendMsg', this.messageText)
       this.messageText = ''
     }
@@ -129,8 +131,8 @@ export default {
   margin: 5px 0;
   color: #999;
 }
-/* .desc::before {
+.desc::before {
   content: '';
   display: none;
-} */
+}
 </style>
